@@ -1,26 +1,29 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*- 
+
 def initGame():
     board={"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}
     return board
 
 def setPosition(player, input, board):
-    usedButtons = [1,2,3,4,5,6,7,8,9]
-    if input in usedButtons:
-        board[str(input)]=player
-        return board
-    else:
-        print("trzeba wpisać ponownie")
-        return
+    board[str(input)]=player
+    return board
 
-def buttonValidation(button):
-    try:
-        int(button)
-        return True
-    except:
-        print("Zły przycisk")
-    return False
-    
+def inputVeryfication(player):
+    playButtons = [1,2,3,4,5,6,7,8,9]
+    while True:
+        p=input(str(player) + ": ")
+        try:
+            p=int(p)
+            if p in playButtons:
+                break
+            else:
+                print("Zły przycisk. Ponów próbę")
+                continue
+        except:
+            print("Ponów próbę")
+            continue
+    return p
 
 def graphics(p):
     print("        ||        ||")
@@ -41,42 +44,14 @@ def main():
     flag=True
     i=0
     graphics(p)
-    player1Flag=True
-    player2Flag=False
 
     while flag:
-        print(str(i) + str(player1Flag))
-        if player1Flag:    
-            player1=input("Player 1:")
-            player1Flag=buttonValidation(player1)
-        
-        if player1Flag:
-            setPosition("X",int(player1),p)
-            graphics(p)
-            print(p)
-            player1Flag=False
-            player2Flag=True
-        else:
-            #player1Flag=True
-            #player2Flag=False
-            continue
-        
-        if player2Flag:    
-            player2=input("Player 2:")
-            player2Flag=buttonValidation(player2)
-            
-        
-        if player2Flag:    
-            setPosition("O",int(player2),p)
-            graphics(p)
-            print(p)
-            player1Flag=True
-            player2Flag=False
-        else:
-            player1Flag=False
-            player2Flag=True
-            continue
-       
+        p1 = inputVeryfication("Player 1")
+        setPosition("X",p1,p)
+        graphics(p)
+        p2 = inputVeryfication("Player 2")
+        setPosition("O",p2,p)
+        graphics(p)
         i+=1
         if i==5:
             break
