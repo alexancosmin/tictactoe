@@ -49,9 +49,7 @@ def graphics(p):
     print(bcolors.WARNING+ "   "+ bcolors.ENDC,bcolors.OKBLUE+ p["1"]+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ p["2"]+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ p["3"]+ bcolors.ENDC,)
     print(bcolors.WARNING+ "        ||        ||"+ bcolors.ENDC)
 
-def checkx(p):
-    P1 = "Player1"
-    P2 = "Player2"
+def checkx(p,P1,P2):
     if p["1"]=="X" and p["2"]=="X" and p["3"]=="X":
         print(bcolors.FAIL+P1," WIN!"+bcolors.ENDC)
         exit(0)
@@ -77,7 +75,7 @@ def checkx(p):
         print(P1," WIN!")
         exit(0)
 
-def checko(p):
+def checko(p,P1,P2):
     P1 = "Player1"
     P2 = "Player2"
     if p["1"]=="O" and p["2"]=="O" and p["3"]=="O":
@@ -122,21 +120,21 @@ def help():
     print("        ||        ||")
     print("\n")
 
-def game():
+def game(player1,player2):
     p=initGame()
     flag=True
     i=0
     while flag:
-        p1 = inputVeryfication("Player 1")
+        p1 = inputVeryfication(player1)
         setPosition("X",p1,p)
         graphics(p)
-        checkx(p)
-        checko(p)
-        p2 = inputVeryfication("Player 2")
+        checkx(p,player1,player2)
+        checko(p,player1,player2)
+        p2 = inputVeryfication(player2)
         setPosition("O",p2,p)
         graphics(p)
-        checkx(p)
-        checko(p)
+        checkx(p,player1,player2)
+        checko(p,player1,player2)
         i+=1
         if i==5:
             break
@@ -153,7 +151,7 @@ def beginGame():
             P1=input(bcolors.OKGREEN+ "Enter name for Player One \n :" + bcolors.ENDC)
             P2=input(bcolors.OKGREEN+ "Enter name for Player Two \n :" + bcolors.ENDC)
             #game
-            game()
+            game(P1,P2)
         #help
         elif menu_select == "h":
             help_select = input(bcolors.OKGREEN+ "Type \'r\' for rules or \'i\' for key input \n :" + bcolors.ENDC)
