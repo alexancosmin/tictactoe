@@ -1,22 +1,5 @@
-print("\n")
-    print(bcolors.OKGREEN+" Key input:"+ bcolors.ENDC)
-    print("\n")
-    print(bcolors.WARNING+ "        ||        ||" + bcolors.ENDC)
-    print(bcolors.WARNING+ "   "+ bcolors.ENDC,bcolors.OKBLUE+ "7" + bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "8" + bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "9" + bcolors.ENDC,)
-    print(bcolors.WARNING+ "        ||        ||" + bcolors.ENDC)
-    print(bcolors.WARNING+ "==============================" + bcolors.ENDC)
-    print(bcolors.WARNING+ "        ||        ||"+ bcolors.ENDC)
-    print(bcolors.WARNING+ "   "+ bcolors.ENDC,bcolors.OKBLUE+ "4"+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "5"+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "6" + bcolors.ENDC,)
-    print(bcolors.WARNING+ "        ||        ||"+ bcolors.ENDC)
-    print(bcolors.WARNING+ "=============================="+ bcolors.ENDC)
-    print(bcolors.WARNING+ "        ||        ||"+ bcolors.ENDC)
-    print(bcolors.WARNING+ "   "+ bcolors.ENDC,bcolors.OKBLUE+ "1"+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "2"+ bcolors.ENDC,bcolors.WARNING+"  ||   "+ bcolors.ENDC,bcolors.OKBLUE+ "3"+ bcolors.ENDC,)
-    print(bcolors.WARNING+ "        ||        ||"+ bcolors.ENDC)
-    print("\n")
-    
-    
-    
-    print("Invalid field number. Enter a number between 1 and 9.")
-    
-    
-    print("Invalid entry, try again")
+else:
+                print(bcolors.FAIL+"Invalid entry, try again."+ bcolors.ENDC)
+                continue
+                
+                
