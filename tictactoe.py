@@ -12,6 +12,20 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+def title():
+    print(bcolors.FAIL+"xxxxxxxxxx   xx   xxxxxxxxxx      xxxxxxxxxx   xxxxxxxxxx   xxxxxxxxxx"+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx   xx                  xx       xx      xx   xx        "+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx   xx                  xx       xxxxxxxxxx   xx        "+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx   xx                  xx       xx      xx   xx        "+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx   xxxxxxxxxx          xx       xx      xx   xxxxxxxxxx"+ bcolors.ENDC)
+    print()
+    print(bcolors.FAIL+"xxxxxxxxxx   xxxxxxxxxx   xxxxxxxxxx      xxxxxxxxxx     xxxxxxxxxx"+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx      xx   xx                      xx     xx      xx"+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx      xx   xxxxxxxxxx      xxxxxxxxxx     xx      xx"+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xx      xx   xx                      xx     xx      xx"+ bcolors.ENDC)
+    print(bcolors.FAIL+"    xx       xxxxxxxxxx   xxxxxxxxxx      xxxxxxxxxx  x  xxxxxxxxxx"+ bcolors.ENDC)
+    print()
+
 def initGame():
     board={"1":" ","2":" ","3":" ","4":" ","5":" ","6":" ","7":" ","8":" ","9":" "}
     return board
@@ -123,6 +137,7 @@ def game(player1,player2):
 
 def beginGame():
     os.system('clear')
+    title()
     print("\n")
     print(bcolors.OKGREEN+ " Welcome to Tic-Tac-Toe ver. 2.1!" + bcolors.ENDC)
 
@@ -155,7 +170,4 @@ def beginGame():
             print(bcolors.FAIL+"Invalid entry, try again."+ bcolors.ENDC)
         continue
 
-def main():
-    beginGame()
-    
-main()
+beginGame()
