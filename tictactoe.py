@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*- 
 import os
+from random import randint
 
 class bcolors:
     BLUE = '\033[94m'
@@ -34,7 +35,10 @@ def setPosition(player, input, board):
 def inputVeryfication(player, sign, board):
     playButtons = [1,2,3,4,5,6,7,8,9]
     while True:
-        p=input(str(player) + " " + sign + ": ")
+        if player=="Computer":
+            p=randint(1, 9)
+        else:
+            p=input(str(player) + " " + sign + ": ")
         try:
             p=int(p)
             if p in playButtons:
@@ -64,9 +68,6 @@ def graphics(p):
     print(bcolors.YELLOW+ "   "+ bcolors.DEFAULT,bcolors.BLUE+ p["1"]+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ p["2"]+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ p["3"]+ bcolors.DEFAULT,)
     print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
 
-def showResult():
-    print(bcolors.RED+P+" " + sign + " WIN!"+bcolors.DEFAULT)
-
 def check(p,P,sign):
     if ((p["1"]==sign and p["2"]==sign and p["3"]==sign)
         or(p["4"]==sign and p["5"]==sign and p["6"]==sign)
@@ -76,15 +77,40 @@ def check(p,P,sign):
         or(p["3"]==sign and p["6"]==sign and p["9"]==sign)
         or(p["1"]==sign and p["5"]==sign and p["9"]==sign)
         or(p["3"]==sign and p["5"]==sign and p["7"]==sign)):
-        print(bcolors.RED+P+" " + sign + " WIN!"+bcolors.DEFAULT)
+        print(bcolors.RED+P+" " + sign + " WINS!"+bcolors.DEFAULT)
         return False
     elif ' ' not in p.values():
         print(bcolors.RED+"DRAW"+bcolors.DEFAULT)
         return False
     return True
 
-def gameSingle():
-    print("Single")
+def gameSingle(player1,player2):
+    p=initGame()
+    os.system('clear')
+    graphics(p)
+    flag=True
+    while True:
+        p1 = inputVeryfication(player1,"X",p)
+        setPosition("X",p1,p)
+        os.system('clear')
+        graphics(p)
+        flag = check(p,player1,"X")
+        if not flag:
+            break
+        flag = check(p,player2,"O")
+        if not flag:
+            break
+        player2 = "Computer"
+        p2 = inputVeryfication(player2, "O",p)
+        setPosition("O",p2,p)
+        os.system('clear')
+        graphics(p)
+        flag=check(p,player1,"X")
+        if not flag:
+            break
+        flag = check(p,player2,"O")
+        if not flag:
+            break
 
 def gameMultiplayer(player1,player2):
     p=initGame()
@@ -154,7 +180,8 @@ def gameMenu():
     game_type = input(bcolors.GREEN+ "Type \'1\' for single player or \'2\' for multiplayer \n :" + bcolors.DEFAULT)
     if game_type == "1":
         P1=input(bcolors.GREEN+ "Enter name for Player One \n :" + bcolors.DEFAULT)
-        gameSingle()
+        P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
+        gameSingle(P1,P2)
     elif game_type == "2":
         P1=input(bcolors.GREEN+ "Enter name for Player One \n :" + bcolors.DEFAULT)
         P2=input(bcolors.GREEN+ "Enter name for Player Two \n :" + bcolors.DEFAULT)
