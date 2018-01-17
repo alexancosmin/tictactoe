@@ -19,11 +19,11 @@ def setPosition(player, input, board):
     board[str(input)]=player
     return board
 
-def inputVeryfication(player):
+def inputVeryfication(player, sign):
     playButtons = [1,2,3,4,5,6,7,8,9]
     moves =[]
     while True:
-        p=input(str(player) + ": ")
+        p=input(str(player) + " " + sign + ": ")
         try:
             p=int(p)
             if p in playButtons:
@@ -76,8 +76,6 @@ def checkx(p,P1,P2):
         exit(0)
 
 def checko(p,P1,P2):
-    P1 = "Player1"
-    P2 = "Player2"
     if p["1"]=="O" and p["2"]=="O" and p["3"]=="O":
         print(P2," WIN!")
         exit(0)
@@ -124,13 +122,14 @@ def game(player1,player2):
     p=initGame()
     flag=True
     i=0
+    graphics(p)
     while flag:
-        p1 = inputVeryfication(player1)
+        p1 = inputVeryfication(player1, "X")
         setPosition("X",p1,p)
         graphics(p)
         checkx(p,player1,player2)
         checko(p,player1,player2)
-        p2 = inputVeryfication(player2)
+        p2 = inputVeryfication(player2, "O")
         setPosition("O",p2,p)
         graphics(p)
         checkx(p,player1,player2)
