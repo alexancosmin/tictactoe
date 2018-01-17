@@ -138,9 +138,7 @@ def game(player1,player2):
 def beginGame():
     os.system('clear')
     title()
-    print("\n")
-    print(bcolors.OKGREEN+ " Welcome to Tic-Tac-Toe ver. 2.1!" + bcolors.ENDC)
-
+  
     while True:
     #main menu
         menu_select = input(bcolors.OKGREEN+ " Type \'s\' to start new game \n Type \'h\' for help \n Type \'q\' to quit \n:" + bcolors.ENDC)
