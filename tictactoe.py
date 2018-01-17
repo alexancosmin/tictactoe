@@ -63,7 +63,7 @@ def check(p,P,sign):
         or(p["3"]==sign and p["6"]==sign and p["9"]==sign)
         or(p["1"]==sign and p["5"]==sign and p["9"]==sign)
         or(p["3"]==sign and p["5"]==sign and p["7"]==sign)):
-        print(bcolors.FAIL+P," WIN!"+bcolors.ENDC)
+        print(bcolors.FAIL+P+" " + sign + " WIN!"+bcolors.ENDC)
         return False
     return True
 
@@ -124,7 +124,7 @@ def game(player1,player2):
 def beginGame():
     os.system('clear')
     print("\n")
-    print(bcolors.OKGREEN+ " Welcome to Tic-Tac-Toe ver. 1.5!" + bcolors.ENDC)
+    print(bcolors.OKGREEN+ " Welcome to Tic-Tac-Toe ver. 2.1!" + bcolors.ENDC)
 
     while True:
     #main menu
