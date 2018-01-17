@@ -12,27 +12,30 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 def initGame():
-    board={"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}
+    board={"1":" ","2":" ","3":" ","4":" ","5":" ","6":" ","7":" ","8":" ","9":" "}
     return board
 
 def setPosition(player, input, board):
     board[str(input)]=player
     return board
 
-def inputVeryfication(player, sign):
+def inputVeryfication(player, sign, board):
     playButtons = [1,2,3,4,5,6,7,8,9]
-    moves =[]
     while True:
         p=input(str(player) + " " + sign + ": ")
         try:
             p=int(p)
             if p in playButtons:
-                break
+                if board[str(p)] == 'X' or board[str(p)] == 'O':
+                    print("To pole jest już zajęte. Ponów próbę!")
+                    continue
+                else:
+                    break
             else:
-                print("Zły przycisk. Ponów próbę")
+                print("Należy podać cyfrę od 1 - 9. Ponów próbę!")
                 continue
         except:
-            print("Ponów próbę")
+            print("Wpisałeś dziwny znak! Należy podać cyfrę od 1 - 9. Ponów próbę!")
             continue
     return p
 
@@ -124,12 +127,12 @@ def game(player1,player2):
     i=0
     graphics(p)
     while flag:
-        p1 = inputVeryfication(player1, "X")
+        p1 = inputVeryfication(player1,"X",p)
         setPosition("X",p1,p)
         graphics(p)
         checkx(p,player1,player2)
         checko(p,player1,player2)
-        p2 = inputVeryfication(player2, "O")
+        p2 = inputVeryfication(player2, "O",p)
         setPosition("O",p2,p)
         graphics(p)
         checkx(p,player1,player2)
