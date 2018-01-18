@@ -167,7 +167,7 @@ def gameMenu(scoreTable):
         P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
         while True:
             game(P1,"Computer",scoreTable)
-            again = input("Do you want to try again? (y/something)")
+            again = input(bcolors.GREEN + "Do you want to try again? (y/any other key)" + bcolors.DEFAULT)
             if again=='y':
                 continue
             else:
@@ -183,7 +183,7 @@ def gameMenu(scoreTable):
             P2 = P2 + "2"
         while True:
             game(P1,P2,scoreTable)
-            again = input("Do you want to try again? (y/something)")
+            again = input(bcolors.GREEN + "Do you want to try again? (y/any other key)"+ bcolors.DEFAULT)
             if again=='y':
                 continue
             else:
@@ -201,7 +201,7 @@ def invaliEntry():
     print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
 
 def mainMenu(scoreTable):
-    menu_select = input(bcolors.GREEN+ " Type \'s\' to start new game \n Type \'h\' for help \n Type \'q\' to quit \n:" + bcolors.DEFAULT) 
+    menu_select = input(bcolors.GREEN+ " Type \'s\' to start new game \n Type \'h\' for help \n Type \'q\' to quit \n:" + bcolors.DEFAULT)
     if menu_select == "s":
         os.system('clear')
         gameMenu(scoreTable)
