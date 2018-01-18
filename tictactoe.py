@@ -4,11 +4,11 @@ import os
 from random import randint
 
 class bcolors:
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    DEFAULT = '\033[0m'
+    BLUE = '\033[1;94m'
+    GREEN = '\033[1;92m'
+    YELLOW = '\033[1;93m'
+    RED = '\033[1;91m'
+    DEFAULT = '\033[1;0m'
 
 def title():
     print(bcolors.RED+"xxxxxxxxxx   xx   xxxxxxxxxx      xxxxxxxxxx   xxxxxxxxxx   xxxxxxxxxx"+ bcolors.DEFAULT)
@@ -72,7 +72,17 @@ def graphics(p):
     print(bcolors.YELLOW+ "   "+ bcolors.DEFAULT,bcolors.BLUE+ p["1"]+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ p["2"]+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ p["3"]+ bcolors.DEFAULT,)
     print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
 
-def check(p,P,sign):
+def addToScoreTable(player, scoreTable):
+    if player in scoreTable:
+        scoreTable[player] += 1
+    else:
+        scoreTable[player]= 1
+
+def presentScoreTable(scoreTable):
+    for item in scoreTable:
+        print(bcolors.BLUE+"||  "+ str(scoreTable[item])+"  points for  " +item+ bcolors.BLUE)
+
+def check(p,P,sign,scoreTable):
     if ((p["1"]==sign and p["2"]==sign and p["3"]==sign)
         or(p["4"]==sign and p["5"]==sign and p["6"]==sign)
         or(p["7"]==sign and p["8"]==sign and p["9"]==sign)
@@ -81,14 +91,17 @@ def check(p,P,sign):
         or(p["3"]==sign and p["6"]==sign and p["9"]==sign)
         or(p["1"]==sign and p["5"]==sign and p["9"]==sign)
         or(p["3"]==sign and p["5"]==sign and p["7"]==sign)):
-        print(bcolors.RED+P+" " + sign + " WINS!"+bcolors.DEFAULT)
+        print(bcolors.RED+P+" " +"\""+ sign + "\" WINS!"+bcolors.DEFAULT)
+        addToScoreTable(P,scoreTable)
+        presentScoreTable(scoreTable)
         return False
     elif ' ' not in p.values():
         print(bcolors.RED+"DRAW"+bcolors.DEFAULT)
+        presentScoreTable(scoreTable)
         return False
     return True
 
-def game(player1,player2):
+def game(player1,player2,scoreTable):
     p=initGame()
     os.system('clear')
     graphics(p)
@@ -98,21 +111,20 @@ def game(player1,player2):
         setPosition("X",p1,p)
         os.system('clear')
         graphics(p)
-        flag = check(p,player1,"X")
+        flag = check(p,player1,"X",scoreTable)
         if not flag:
             break
-        flag = check(p,player2,"O")
+        flag = check(p,player2,"O",scoreTable)
         if not flag:
             break
-
         p2 = inputVeryfication(player2, "O",p)
         setPosition("O",p2,p)
         os.system('clear')
         graphics(p)
-        flag=check(p,player1,"X")
+        flag=check(p,player1,"X",scoreTable)
         if not flag:
             break
-        flag = check(p,player2,"O")
+        flag = check(p,player2,"O",scoreTable)
         if not flag:
             break
 
@@ -127,7 +139,7 @@ def helpMenuRules():
     print(bcolors.GREEN+ "Each player takes a turn and selects a field \nwhich they wish to place their marker on by\ntyping a corresponding number. \nThe goal of the game is to place 3 of your markers \nin a straight line (vertical, horizontal or diagonal)." + bcolors.DEFAULT)
     print()
 
-def helpMenu():
+def helpMenu(scoreTable):
     os.system('clear')
     help_select = input(bcolors.GREEN+ "Type:\n\'r\' for rules\n\'i\' for key input\n\'q\' for back to main menu\n:" + bcolors.DEFAULT)
     if help_select == "i":
@@ -135,50 +147,51 @@ def helpMenu():
     elif help_select == "r":   
         helpMenuRules()
     elif help_select == "q":   
-        mainMenu()
+        mainMenu(scoreTable)
     else:
         invaliEntry()
-        helpMenu()
+        helpMenu(scoreTable)
 
 def getPlayerName(player):
     return input(bcolors.GREEN+ "Enter name for "+ player + ":\n" + bcolors.DEFAULT)
 
-def gameMenu():
+def gameMenu(scoreTable):
     game_type = input(bcolors.GREEN+ "Type:\n\'1\' for single player \n\'2\' for multiplayer\n:" + bcolors.DEFAULT)
     if game_type == "1":
         P1=getPlayerName("Player One")
         P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
-        game(P1,"Computer")
+        game(P1,"Computer",scoreTable)
     elif game_type == "2":
         P1=getPlayerName("Player One")
         P2=getPlayerName("Player Two")
-        game(P1,P2)
+        game(P1,P2,scoreTable)
     else:
         print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
-        gameMenu()
+        gameMenu(scoreTable)
 
 def invaliEntry():
     print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
 
-def mainMenu():
+def mainMenu(scoreTable):
     menu_select = input(bcolors.GREEN+ " Type \'s\' to start new game \n Type \'h\' for help \n Type \'q\' to quit \n:" + bcolors.DEFAULT) 
     if menu_select == "s":
         os.system('clear')
-        gameMenu()
-        mainMenu()
+        gameMenu(scoreTable)
+        mainMenu(scoreTable)
     elif menu_select == "h":
         os.system('clear')
-        helpMenu()
-        mainMenu()
+        helpMenu(scoreTable)
+        mainMenu(scoreTable)
     elif menu_select == "q":
         exit(0)
     else:
         invaliEntry()
-        mainMenu()
+        mainMenu(scoreTable)
 
 def main():
     os.system('clear')
     title()
-    mainMenu()
+    scoreTable={}
+    mainMenu(scoreTable)
 
 main()
