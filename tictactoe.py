@@ -28,6 +28,10 @@ def initGame():
     board={"1":" ","2":" ","3":" ","4":" ","5":" ","6":" ","7":" ","8":" ","9":" "}
     return board
 
+def initHelp():
+    board={"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}
+    return board
+
 def setPosition(player, input, board):
     board[str(input)]=player
     return board
@@ -155,7 +159,7 @@ def gameMultiplayer(player1,player2):
 
 def helpMenuInfo():
     os.system('clear')
-    p=initGame()
+    p=initHelp()
     graphics(p)
     print()
 
