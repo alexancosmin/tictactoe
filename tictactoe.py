@@ -9,6 +9,7 @@ class bcolors:
     YELLOW = '\033[1;93m'
     RED = '\033[1;91m'
     DEFAULT = '\033[1;0m'
+    PINK = '\033[1;95m'
 
 def title():
     print(bcolors.RED+"xxxxxxxxxx   xx   xxxxxxxxxx      xxxxxxxxxx   xxxxxxxxxx   xxxxxxxxxx"+ bcolors.DEFAULT)
@@ -80,7 +81,7 @@ def addToScoreTable(player, scoreTable):
 
 def presentScoreTable(scoreTable):
     for item in scoreTable:
-        print(bcolors.BLUE+"||  "+ str(scoreTable[item])+"  points for  " +item+ bcolors.BLUE)
+        print(bcolors.PINK+"||  "+ str(scoreTable[item])+"  points for  " +item+ bcolors.DEFAULT)
 
 def check(p,P,sign,scoreTable):
     if ((p["1"]==sign and p["2"]==sign and p["3"]==sign)
@@ -146,7 +147,8 @@ def helpMenu(scoreTable):
         helpMenuInfo()
     elif help_select == "r":   
         helpMenuRules()
-    elif help_select == "q":   
+    elif help_select == "q":
+        os.system('clear')   
         mainMenu(scoreTable)
     else:
         invaliEntry()
@@ -155,16 +157,42 @@ def helpMenu(scoreTable):
 def getPlayerName(player):
     return input(bcolors.GREEN+ "Enter name for "+ player + ":\n" + bcolors.DEFAULT)
 
+
 def gameMenu(scoreTable):
-    game_type = input(bcolors.GREEN+ "Type:\n\'1\' for single player \n\'2\' for multiplayer\n:" + bcolors.DEFAULT)
+    game_type = input(bcolors.GREEN+ "Type:\n\'1\' for single player \n\'2\' for multiplayer\n\'q\' to go to main menu\n:" + bcolors.DEFAULT)
     if game_type == "1":
+        scoreTable.clear()
+        os.system('clear')
         P1=getPlayerName("Player One")
         P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
-        game(P1,"Computer",scoreTable)
+        while True:
+            game(P1,"Computer",scoreTable)
+            again = input("Do you want to try again? (y/something)")
+            if again=='y':
+                continue
+            else:
+                break
+        os.system('clear')
+        gameMenu(scoreTable)
     elif game_type == "2":
+        scoreTable.clear()
+        os.system('clear')
         P1=getPlayerName("Player One")
         P2=getPlayerName("Player Two")
-        game(P1,P2,scoreTable)
+        if P1 == P2:
+            P2 = P2 + "2"
+        while True:
+            game(P1,P2,scoreTable)
+            again = input("Do you want to try again? (y/something)")
+            if again=='y':
+                continue
+            else:
+                break
+        os.system('clear')
+        gameMenu(scoreTable)
+    elif game_type == "q":
+        os.system('clear')
+        mainMenu(scoreTable)
     else:
         print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
         gameMenu(scoreTable)
@@ -177,7 +205,6 @@ def mainMenu(scoreTable):
     if menu_select == "s":
         os.system('clear')
         gameMenu(scoreTable)
-        mainMenu(scoreTable)
     elif menu_select == "h":
         os.system('clear')
         helpMenu(scoreTable)
