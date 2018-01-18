@@ -87,22 +87,8 @@ def check(p,P,sign):
         print(bcolors.RED+"DRAW"+bcolors.DEFAULT)
         return False
     return True
-"""
-def playerMove():
-    p1 = inputVeryfication(player1,"X",p)
-    setPosition("X",p1,p)
-    os.system('clear')
-    graphics(p)
-    flag = check(p,player1,"X")
-    if not flag:
-        break
-        flag = check(p,player2,"O")
-    if not flag:
-        break
-    return flag
-"""
 
-def gameSingle(player1,player2):
+def game(player1,player2):
     p=initGame()
     os.system('clear')
     graphics(p)
@@ -118,34 +104,7 @@ def gameSingle(player1,player2):
         flag = check(p,player2,"O")
         if not flag:
             break
-        player2 = "Computer"
-        p2 = inputVeryfication(player2, "O",p)
-        setPosition("O",p2,p)
-        os.system('clear')
-        graphics(p)
-        flag=check(p,player1,"X")
-        if not flag:
-            break
-        flag = check(p,player2,"O")
-        if not flag:
-            break
 
-def gameMultiplayer(player1,player2):
-    p=initGame()
-    os.system('clear')
-    graphics(p)
-    flag=True
-    while True:
-        p1 = inputVeryfication(player1,"X",p)
-        setPosition("X",p1,p)
-        os.system('clear')
-        graphics(p)
-        flag = check(p,player1,"X")
-        if not flag:
-            break
-        flag = check(p,player2,"O")
-        if not flag:
-            break
         p2 = inputVeryfication(player2, "O",p)
         setPosition("O",p2,p)
         os.system('clear')
@@ -189,11 +148,11 @@ def gameMenu():
     if game_type == "1":
         P1=getPlayerName("Player One")
         P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
-        gameSingle(P1,P2)
+        game(P1,"Computer")
     elif game_type == "2":
         P1=getPlayerName("Player One")
         P2=getPlayerName("Player Two")
-        gameMultiplayer(P1,P2)
+        game(P1,P2)
     else:
         print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
         gameMenu()
