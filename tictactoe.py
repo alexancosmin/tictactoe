@@ -83,6 +83,20 @@ def check(p,P,sign):
         print(bcolors.RED+"DRAW"+bcolors.DEFAULT)
         return False
     return True
+"""
+def playerMove():
+    p1 = inputVeryfication(player1,"X",p)
+    setPosition("X",p1,p)
+    os.system('clear')
+    graphics(p)
+    flag = check(p,player1,"X")
+    if not flag:
+        break
+        flag = check(p,player2,"O")
+    if not flag:
+        break
+    return flag
+"""
 
 def gameSingle(player1,player2):
     p=initGame()
@@ -139,52 +153,42 @@ def gameMultiplayer(player1,player2):
         if not flag:
             break
 
-def help():
-    os.system('clear')
-    print("\n")
-    print(bcolors.GREEN+" Key input:"+ bcolors.DEFAULT)
-    print("\n")
-    print(bcolors.YELLOW+ "        ||        ||" + bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "   "+ bcolors.DEFAULT,bcolors.BLUE+ "7" + bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "8" + bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "9" + bcolors.DEFAULT,)
-    print(bcolors.YELLOW+ "        ||        ||" + bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "==============================" + bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "   "+ bcolors.DEFAULT,bcolors.BLUE+ "4"+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "5"+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "6" + bcolors.DEFAULT,)
-    print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "=============================="+ bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
-    print(bcolors.YELLOW+ "   "+ bcolors.DEFAULT,bcolors.BLUE+ "1"+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "2"+ bcolors.DEFAULT,bcolors.YELLOW+"  ||   "+ bcolors.DEFAULT,bcolors.BLUE+ "3"+ bcolors.DEFAULT,)
-    print(bcolors.YELLOW+ "        ||        ||"+ bcolors.DEFAULT)
-    print("\n")
-          
 def helpMenuInfo():
-    help()
+    os.system('clear')
+    p=initGame()
+    graphics(p)
+    print()
 
 def helpMenuRules():
-    print(bcolors.GREEN+ "Each player takes a turn and selects a field \nwhich they wish to place their marker on by \ntyping a corresponding number. \nThe goal of the game is to place 3 of your markers \nin a straight line (vertical, horizontal or diagonal)." + bcolors.DEFAULT)
+    os.system('clear')
+    print(bcolors.GREEN+ "Each player takes a turn and selects a field \nwhich they wish to place their marker on by\ntyping a corresponding number. \nThe goal of the game is to place 3 of your markers \nin a straight line (vertical, horizontal or diagonal)." + bcolors.DEFAULT)
+    print()
 
 def helpMenu():
     os.system('clear')
-    help_select = input(bcolors.GREEN+ "Type \'r\' for rules or \'i\' for key input \n :" + bcolors.DEFAULT)
+    help_select = input(bcolors.GREEN+ "Type:\n\'r\' for rules\n\'i\' for key input\n\'q\' for back to main menu\n:" + bcolors.DEFAULT)
     if help_select == "i":
-        os.system('clear')
         helpMenuInfo()
-    elif help_select == "r":
-        os.system('clear')
+    elif help_select == "r":   
         helpMenuRules()
+    elif help_select == "q":   
+        mainMenu()
     else:
         invaliEntry()
-        helpMenu()        
+        helpMenu()
+
+def getPlayerName(player):
+    return input(bcolors.GREEN+ "Enter name for "+ player + ":\n" + bcolors.DEFAULT)
 
 def gameMenu():
-    game_type = input(bcolors.GREEN+ "Type \'1\' for single player or \'2\' for multiplayer \n :" + bcolors.DEFAULT)
+    game_type = input(bcolors.GREEN+ "Type:\n\'1\' for single player \n\'2\' for multiplayer\n:" + bcolors.DEFAULT)
     if game_type == "1":
-        P1=input(bcolors.GREEN+ "Enter name for Player One \n :" + bcolors.DEFAULT)
+        P1=getPlayerName("Player One")
         P2=bcolors.GREEN+ "Computer" + bcolors.DEFAULT
         gameSingle(P1,P2)
     elif game_type == "2":
-        P1=input(bcolors.GREEN+ "Enter name for Player One \n :" + bcolors.DEFAULT)
-        P2=input(bcolors.GREEN+ "Enter name for Player Two \n :" + bcolors.DEFAULT)
+        P1=getPlayerName("Player One")
+        P2=getPlayerName("Player Two")
         gameMultiplayer(P1,P2)
     else:
         print(bcolors.RED+"Invalid entry, try again."+ bcolors.DEFAULT)
