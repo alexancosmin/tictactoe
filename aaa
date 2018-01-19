@@ -1,7 +1,0 @@
-else:
-      print(bcolors.FAIL+"Invalid entry, try again."+ bcolors.ENDC)
-      continue
-                
-                
-        elif menu_select == "q":
-            exit(0)
